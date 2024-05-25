@@ -1,3 +1,26 @@
+# Phone Number Generator
+The new script [num_gen_V2.py](num_gen_V2.py) is optimized to generate any sequence of numbers, and is specially good for when you know multiple sections of the number. For example we know the country code (+1) and also e know that the number ends in 69, and there's 34 as 3rd and 4th digits, and since the phone number length in US is 10 digits (11 if we count the country code), then we would have a sequence like +1x34xxxxx69 where 'x' indicates the numbers the script is gonna generate.
+
+*Script accepts country code with +*
+
+**Output:** The output file will be generated where [num_gen_V2.py](num_gen_V2.py) is located. Make sure the script has permission to create files in that directory!
+
+
+**How to use the output file:**
+
+1. Head to [Google contacts](https://contacts.google.com)
+2. Login with your account, preferably with a new Google account that has no contacts synced with it (you can use any account with contacts too, your imported contacts will be stored in a separate label called "Imported")
+3. From the left panel, choose import, then choose "output.csv" file
+4. Wait for import to finish
+5. On a device or emulator, login into the same Google account and sync your contacts
+6. Use the desired messenger app to check for newly imported contacts (**works with any app that syncs with your contacts, not only Telegram!**)
+
+
+----------------------------------------------------------
+
+
+*The next part is forked from CVE-2019-15515*
+
 # CVE-2019-15514
 **Type:** Information Disclosure
 
