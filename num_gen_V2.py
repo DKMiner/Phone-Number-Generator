@@ -5,6 +5,7 @@ import itertools
 import csv
 import random
 import string
+import time
 
 
 #Global variables and Preparations
@@ -105,6 +106,7 @@ with open('output.csv', 'w', newline='') as csvfile:
                     if(len(b)>i):
                         out_list.append(b[i])
         out.append(sep.join(out_list))
+        print(out)
         row = {field: '' for field in fieldnames}
         row['Name'] = generate_random_name(10)
         row['Given Name'] = row['Name']
@@ -115,3 +117,6 @@ with open('output.csv', 'w', newline='') as csvfile:
         b.clear()
         out_list.clear()
         out.clear()
+
+print("File created! The script will close now")
+time.sleep(5)
