@@ -16,6 +16,16 @@ The new script [num_gen_V2.py](num_gen_V2.py) is optimized to generate any seque
 6. Use the desired messenger app to check for newly imported contacts (**works with any app that syncs with your contacts, not only Telegram!**)
 
 
+**Limits**:
+1. Since each CSV file can hold up to one million rows, you can only store contacts generated from 6 x's or less
+2. Each google account stores up to 25000 contacts, so it can only hold contacts for 4 x's or so, but not 5 x's, so keep that in mind
+3. The script is not writen in c/c++ which increases generation time greatly!
+
+
+*To-do*:
+1. Rewrite in c/c++
+2. Tweak CSV to use the unused fields such as work or home number to increase maximum number a CSV file can hold
+
 ----------------------------------------------------------
 
 
