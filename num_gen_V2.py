@@ -11,10 +11,12 @@ import time
 #Global variables and Preparations
 
 sequence = input("Enter a number sequence like 12x456x78 in which 'x's are the unknown numbers: ").lower()
+
 sep = ''
 out_list = []
 b = []
 out = []
+extension = ''
 fieldnames = [
     "Name", "Given Name", "Additional Name", "Family Name", "Yomi Name",
     "Given Name Yomi", "Additional Name Yomi", "Family Name Yomi",
@@ -54,25 +56,18 @@ def generate_random_name(length):
     return ''.join(random.choice(letters) for i in range(length))
 
 
-#Main
-
-if sequence[0] == 'x':
-    x_at_start = True
-else:
-    x_at_start = False
-
-numbers = sequence.split('x')
-numbers[:] = [x for x in numbers if x]
-
-x_group = count_consecutive_xs(sequence)
-
-x_len = sum(x_group)
+def ask_ext():
+    a = input("Output file format? (T=txt C=Google CSV): ").lower()
+    return a
 
 
-with open('output.csv', 'w', newline='') as csvfile:
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-    writer.writeheader()
-
+def main():
+    if extension == 't':
+        file = open('output.txt', 'w')
+    else:
+        csvfile = open('output.csv', 'w', newline='')
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
     for mid_num in range(int(consecutive(x_len, "9")) + 1):
         digits = x_len - len(str(mid_num))
         generated_numbers = str(mid_num)
@@ -107,16 +102,42 @@ with open('output.csv', 'w', newline='') as csvfile:
                         out_list.append(b[i])
         out.append(sep.join(out_list))
         print(out)
-        row = {field: '' for field in fieldnames}
-        row['Name'] = generate_random_name(10)
-        row['Given Name'] = row['Name']
-        row['Group Membership'] = '* myContacts'
-        row['Phone 1 - Type'] = 'Mobile'
-        row['Phone 1 - Value'] = out[0]
-        writer.writerow(row)
+        if extension == 't':
+            file.write(out[0]+"\n")
+        else:
+            row = {field: '' for field in fieldnames}
+            row['Name'] = generate_random_name(10)
+            row['Given Name'] = row['Name']
+            row['Group Membership'] = '* myContacts'
+            row['Phone 1 - Type'] = 'Mobile'
+            row['Phone 1 - Value'] = out[0]
+            writer.writerow(row)
         b.clear()
         out_list.clear()
         out.clear()
+
+
+#Main
+
+if sequence[0] == 'x':
+    x_at_start = True
+else:
+    x_at_start = False
+
+numbers = sequence.split('x')
+numbers[:] = [x for x in numbers if x]
+
+x_group = count_consecutive_xs(sequence)
+
+x_len = sum(x_group)
+
+while True:
+    extension = ask_ext()
+    if extension == 'c' or extension == 't':
+        break
+    
+main()
+
 
 print("File created! The script will close now")
 time.sleep(5)
